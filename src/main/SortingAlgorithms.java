@@ -188,7 +188,48 @@ public class SortingAlgorithms {
         return a;
     }
 
+    /*Heap sort*/
+    public static void adjustHeap(double []arr,int i,int length){
+        double temp = arr[i];//get current element i
+        for(int k=i*2+1;k<length;k=k*2+1){//Start from the left child(2i+1) of i
+            if(k+1<length && arr[k]<arr[k+1]){//if left child is smaller than right child, k point to right child.
+                k++;
+            }
+            if(arr[k] >temp){//if the child is greater than father, assign child value to father(no need to swap).
+                arr[i] = arr[k];
+                i = k;
+            }else{
+                break;
+            }
+        }
+        arr[i] = temp;
+    }
+
+    public static void swap(double []arr,int a ,int b){
+        double temp=arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+
+    /**
+     * Heap sort.
+     * Average time complexity O(nlogn).
+     * Space complexity O(1).
+     * Unstable.
+     * @param a
+     * @return
+     */
     public double[] heapSort(double[] a) {
+        //Form max heap
+        for(int i=a.length/2-1;i>=0;i--){
+            //Start from the first non leaf node, from bottom to top, from right to left to adjust structure.
+            adjustHeap(a,i,a.length);
+        }
+        //Adjust heap structure, swap top element with end element.
+        for(int j=a.length-1;j>0;j--){
+            swap(a,0,j);//
+            adjustHeap(a,0,j);//Readjust heap
+        }
         return a;
     }
 

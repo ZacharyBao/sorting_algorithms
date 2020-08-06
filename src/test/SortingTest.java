@@ -99,6 +99,19 @@ public class SortingTest {
     }
 
     @Test
+    public void heapSortTest() {
+        int len = testArr1.length;
+        double[] test = new double[len];
+        System.arraycopy(testArr1, 0, test, 0, len);
+        startTime = System.nanoTime();
+        double[] result = sortingAlgorithms.heapSort(test);
+        endTime = System.nanoTime();
+        costTime = endTime - startTime;
+        Assertions.assertArrayEquals(expectedTestArr1, result);
+        System.out.println("HeapSort-O(nlogn) running time:" + costTime + "ns");
+    }
+
+    @Test
     public void countingSortTest() {
         int len = testArr2.length;
         int[] test = new int[len];
